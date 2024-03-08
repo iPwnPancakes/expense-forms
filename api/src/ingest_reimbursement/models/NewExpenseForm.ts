@@ -21,7 +21,6 @@ export type Input = {
 }
 
 export function fromMultipartForm(parts: Input[]): NewExpenseForm {
-    console.log(parts);
     const date = parts.find(p => p.name === 'date')?.data.toString();
     const vendor = parts.find(p => p.name === 'vendor')?.data.toString();
     const item_name = parts.find(p => p.name === 'item_name')?.data.toString();
