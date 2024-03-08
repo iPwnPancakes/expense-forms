@@ -18,8 +18,8 @@ async function addExpense(expense: NewExpenseForm, sheet: GoogleSpreadsheetWorks
         Vendor: expense.vendor,
         'Item Purchased': expense.item_name,
         Amount: expense.amount,
-        'Receipt': expense.base64_receipt,
-        'Reimbursement Receipt': expense.base64_reimbursement,
+        'Receipt': expense.base64_receipt_image,
+        'Reimbursement Receipt': expense.base64_reimbursement_image,
         'Reason': expense.purchase_reason
     });
 }
