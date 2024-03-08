@@ -1,0 +1,29 @@
+{
+    "name": "ingest_reimbursement_form",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js",
+        "tsc": "tsc",
+        "clean": "rimraf ./build && rimraf ./dist && mkdir ./dist",
+        "compile": "npm run clean && tsc --outDir ./build",
+        "zip": "cd ./build && zip -r ingest_reimbursement_form.zip * && mv ingest_reimbursement_form.zip ../dist",
+        "build": "npm run compile && cp -r ./node_modules ./build && npm run zip"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "google-auth-library": "^9.6.3",
+        "google-spreadsheet": "^4.1.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.25",
+        "dotenv": "^16.4.5",
+        "rimraf": "^5.0.5",
+        "tsc": "^2.0.4",
+        "typescript": "^5.4.2"
+    }
+}
