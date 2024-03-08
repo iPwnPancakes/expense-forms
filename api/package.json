@@ -1,9 +1,17 @@
 {
+  "scripts": {
+    "start": "sls offline"
+  },
   "dependencies": {
     "google-auth-library": "^9.6.3",
-    "google-spreadsheet": "^4.1.1"
+    "google-spreadsheet": "^4.1.1",
+    "parse-multipart": "^1.0.4",
+    "parse-multipart-data": "^1.5.0"
   },
   "devDependencies": {
+    "@types/formidable": "^3.4.5",
+    "@types/parse-multipart": "^1.0.2",
+    "serverless": "^3.38.0",
     "serverless-offline": "^13.3.3",
     "serverless-plugin-typescript": "^2.1.5",
     "source-map-support": "^0.5.21",

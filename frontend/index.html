@@ -5,7 +5,7 @@
     </head>
 
     <body>
-        <form id="newExpenseForm" method="post" enctype="multipart/form-data" action="https://y52ovtpt55.execute-api.us-west-1.amazonaws.com/default/add_expense">
+        <form id="newExpenseForm" method="post" enctype="multipart/form-data" action="http://localhost:3000">
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" required><br><br>
 
@@ -19,10 +19,10 @@
             <input type="number" id="amount" name="amount" step="0.01" required><br><br>
 
             <label for="receipt_image">Receipt Image:</label>
-            <input type="file" id="receipt_image" name="base64_receipt_image" accept="image/*" required><br><br>
+            <input type="file" id="receipt_image" name="receipt_image" accept="image/*" required><br><br>
 
             <label for="reimbursement_image">Reimbursement Image (optional):</label>
-            <input type="file" id="reimbursement_image" name="base64_reimbursement_image" accept="image/*"><br><br>
+            <input type="file" id="reimbursement_image" name="reimbursement_image" accept="image/*"><br><br>
 
             <label for="purchase_reason">Purchase Reason:</label>
             <textarea id="purchase_reason" name="purchase_reason" cols="30" rows="5" required></textarea><br><br>
