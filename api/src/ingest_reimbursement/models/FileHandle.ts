@@ -16,10 +16,6 @@ export class FileHandle {
         return new FileHandle(input.filename, input.data, input.type);
     }
 
-    public isPdf(): boolean {
-        return this.contentType === 'application/pdf';
-    }
-
     public contentHash(): string {
         const hash = require('crypto').createHash('sha256');
         hash.update(this.content_buffer);
