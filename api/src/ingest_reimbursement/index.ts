@@ -1,6 +1,6 @@
 import { GoogleSpreadsheet, GoogleSpreadsheetWorksheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
-import { fromLambdaEvent, NewExpenseForm } from './models/NewExpenseForm.js';
+import { fromLambdaEvent, NewExpenseForm } from './models/NewExpenseForm';
 import { randomUUID } from "node:crypto";
 
 async function getSpreadsheet(sheetID: string, auth: JWT): Promise<GoogleSpreadsheet> {
@@ -25,11 +25,6 @@ async function addExpense(expense: NewExpenseForm, sheet: GoogleSpreadsheetWorks
 }
 
 export async function handler(event: any) {
-    if (process.env.NODE_ENV !== 'production') {
-        const dotenv = await import('dotenv');
-        dotenv.config();
-    }
-
     if (process.env.GOOGLE_EMAIL === undefined || process.env.GOOGLE_PRIVATE_KEY === undefined || process.env.SHEET_ID === undefined) {
         throw new Error('Google API credentials not set');
     }

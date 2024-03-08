@@ -1,5 +1,5 @@
 .idea/
-cloud_functions/ingest_reimbursement_form/.env
+**/.env
 !**/.env.example
 **/node_modules
 **/build
