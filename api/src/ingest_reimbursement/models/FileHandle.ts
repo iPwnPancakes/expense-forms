@@ -1,4 +1,4 @@
-import { Input } from "./NewExpenseForm";
+import { MultipartFile } from "lambda-multipart-parser";
 
 export class FileHandle {
     constructor(
@@ -8,12 +8,12 @@ export class FileHandle {
     ) {
     }
 
-    static fromInput(input: Input): FileHandle {
-        if (!input.filename || !input.data || !input.type) {
+    static fromMultipartFile(input: MultipartFile): FileHandle {
+        if (!input.filename || !input.content || !input.contentType) {
             throw new Error('Cannot construct FileHandle from invalid input');
         }
 
-        return new FileHandle(input.filename, input.data, input.type);
+        return new FileHandle(input.filename, input.content, input.contentType);
     }
 
     public contentHash(): string {

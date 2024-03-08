@@ -1,4 +1,6 @@
 import { FileHandle } from "./FileHandle";
+import { MultipartRequest } from "lambda-multipart-parser";
+import { UploadedFile } from "./UploadedFile";
 
 export class NewExpenseForm {
     public constructor(
@@ -6,8 +8,8 @@ export class NewExpenseForm {
         public readonly vendor: string,
         public readonly item_name: string,
         public readonly amount: number,
-        public readonly receipt: FileHandle,
-        public readonly reimbursement: FileHandle,
+        public readonly receipt: UploadedFile,
+        public readonly reimbursement: UploadedFile,
         public readonly purchase_reason: string,
     ) {
     }
@@ -20,15 +22,12 @@ export type Input = {
     data: Buffer
 }
 
-export function fromMultipartForm(parts: Input[]): NewExpenseForm {
-    const date = parts.find(p => p.name === 'date')?.data.toString();
-    const vendor = parts.find(p => p.name === 'vendor')?.data.toString();
-    const item_name = parts.find(p => p.name === 'item_name')?.data.toString();
-    const amount = parts.find(p => p.name === 'amount')?.data.toString();
-    const purchase_reason = parts.find(p => p.name === 'purchase_reason')?.data.toString();
-
-    const receipt_input = parts.find(p => p.name === 'receipt_image');
-    const reimbursement_input = parts.find(p => p.name === 'reimbursement_image');
+export function fromMultipartForm(parts: MultipartRequest, receipt: UploadedFile, reimbursement: UploadedFile): NewExpenseForm {
+    const date = parts['date'];
+    const vendor = parts['vendor'];
+    const item_name = parts['item_name'];
+    const amount = parts['amount'];
+    const purchase_reason = parts['purchase_reason'];
 
     if (!date) {
         throw new Error('Date is required');
@@ -38,10 +37,6 @@ export function fromMultipartForm(parts: Input[]): NewExpenseForm {
         throw new Error('Item Name is required');
     } else if (!amount) {
         throw new Error('Amount is required');
-    } else if (!receipt_input) {
-        throw new Error('Receipt Image is required');
-    } else if (!reimbursement_input) {
-        throw new Error('Reimbursement Image is required');
     } else if (!purchase_reason) {
         throw new Error('Purchase Reason is required');
     }
@@ -51,8 +46,8 @@ export function fromMultipartForm(parts: Input[]): NewExpenseForm {
         vendor,
         item_name,
         Number(amount),
-        FileHandle.fromInput(receipt_input),
-        FileHandle.fromInput(reimbursement_input),
+        receipt,
+        reimbursement,
         purchase_reason
     );
 }
